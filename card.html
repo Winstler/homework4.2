@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title>
+		</title>
+		<script>
+			let card = prompt('Введите номер карты: ');
+			var card1 = card.split(' ').join('').split('-').join('');
+			card = card.split(' ').join('').split('-').join('').split('');
+			var card2 = card1.split('');
+			let type = function(x){
+				if (x[0]+x[1]+x[2]+x[3] == ('5018' || '5020' || '5038' || '5893' || '6304' || '6759' || '6761' || '6762' || '6763') ){
+					return 'Maestro';
+				}
+				else if(x[0] == 4){
+					return 'Visa';
+				}
+				else if(x[0] == 5 && x.length == 16){
+					return 'MasterCard';
+				}
+				else{
+					return 'Другая';
+				}
+			}
+			let sum = card;
+			sum.pop();
+			sum.reverse();
+			for (let i = 0; i <= 14; i += 2){
+				sum[i] *= 2;
+				if (sum[i] > 9){
+					sum[i] -= 9;
+				}
+			}
+			sum = sum.map(Number);
+			sum1 = function(x){
+ 				var s = 0;
+   				for (i = 0; i < x.length; i++){
+      			s += x[i];
+   				}
+   				return s;
+			}
+			let valid = function(){
+				if(sum1(sum)%10 == card2[15]){
+					return 'Карта валидна';
+				}
+				else{
+					return 'Карта НЕ валидна';
+				}
+			}
+			document.write(`${card1} - номер банковской карты, Издатель: ${type(card1)}, Валидность: ${valid()}`);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
